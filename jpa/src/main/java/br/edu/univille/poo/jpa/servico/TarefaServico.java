@@ -28,6 +28,10 @@ public class TarefaServico {
         if(Strings.isBlank(tarefa.getTitulo())){
             throw new RuntimeException("Titulo não informado.");
         }
+        if(Strings.isBlank(String.valueOf(tarefa.getPrevisao_finalizar()))){
+            throw new RuntimeException("Previsão de finalizar não informada.");
+        }
+
         if(!tarefaRepository.findAllByTitleContaining(tarefa.getTitulo()).isEmpty()){
             throw new RuntimeException("Titulo já está cadastrado.");
         }
@@ -40,10 +44,16 @@ public class TarefaServico {
         if(antigo == null){
             throw new RuntimeException("Tarefa não foi encontrada.");
         }
-        antigo.setTitulo(tarefa.getTitulo()); // MUDAR DEPOIS
+        antigo.setTitulo(tarefa.getTitulo());
         antigo.setDescricao(tarefa.getDescricao());
+        antigo.setFinalizado(tarefa.isFinalizado());
+        antigo.setPrevisao_finalizar(tarefa.getPrevisao_finalizar());
+        antigo.setData_de_finalizacao(tarefa.getData_de_finalizacao());
         if(Strings.isBlank(tarefa.getTitulo())){
             throw new RuntimeException("Titulo não informado.");
+        }
+        if(Strings.isBlank(String.valueOf(tarefa.getPrevisao_finalizar()))){
+            throw new RuntimeException("Previsão de finalizar não informada.");
         }
 
         for(var p : tarefaRepository.findAllByTitleContaining(tarefa.getTitulo())){

@@ -22,7 +22,7 @@ public class Tarefa {
     private String descricao;
     @Column
     private boolean finalizado;
-    @Column
+    @Column(nullable = false)
     private Time previsao_finalizar;
     @Column
     private Time data_de_finalizacao;
